@@ -7,7 +7,8 @@
 ;; Views
 
 (defn home-page []
-  [:div [:h2 "Welcome to Reagent"]])
+  [:div [:h2 "Welcome to Reagent"]
+   [bc/bmi-component]])
 
 ;; -------------------------
 ;; Initialize app
