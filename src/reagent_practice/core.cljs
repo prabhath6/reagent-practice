@@ -1,6 +1,7 @@
 (ns reagent-practice.core
     (:require
-      [reagent.core :as r]))
+     [reagent.core :as r]
+     [reagent-practice.bmi-component :as bc]))
 
 ;; -------------------------
 ;; Views
