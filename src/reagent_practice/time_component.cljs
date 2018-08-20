@@ -13,7 +13,8 @@
    (fn [] (reset! timer (js/Date.))) 1000))
 
 (defn greeting-message [greeting]
-  [:div greeting])
+  [:div
+   [:h3 greeting]])
 
 ;; input handlers
 (defn clock []
