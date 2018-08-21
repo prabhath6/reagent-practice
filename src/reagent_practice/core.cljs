@@ -4,7 +4,8 @@
      [reagent-practice.bmi-component :as bc]
      [reagent-practice.time-component :as tc]
      [reagent-practice.background-color-changer :as bgc]
-     [reagent-practice.fancy-fonts :as ffc]))
+     [reagent-practice.fancy-fonts :as ffc]
+     [reagent-practice.mortgage-calculator :as mcc]))
 
 ;; -------------------------
 ;; Views
@@ -14,7 +15,8 @@
    [bc/bmi-component]
    [tc/timer-component]
    [bgc/bg-color-changer]
-   [ffc/fancy-fonts-component]])
+   [ffc/fancy-fonts-component]
+   [mcc/mortgage-calculator-component]])
 
 ;; -------------------------
 ;; Initialize app

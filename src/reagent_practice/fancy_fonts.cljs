@@ -2,7 +2,7 @@
   (:require [reagent.core :as r]))
 
 ;; state
-(defonce greeting (r/atom nil))
+(defonce greeting (r/atom "These are some fonts to test!@#$."))
 
 ;; helpers
 
@@ -22,4 +22,4 @@
    [:h3 "Fancy Fonts"]
    [text-handler]
    (for [f font-families]
-     [:p {:style {:font-family f :size "18"}} f ": " greet])]))
+     ^{:key f} [:p {:style {:font-family f :size "18"}} f ": " greet])]))
