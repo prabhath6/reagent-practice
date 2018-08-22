@@ -26,7 +26,7 @@
     (Math/max delta 0)))
 
 (defn monthly-repayment [interest repayment-term mortgage-size]
-  (let [monthly-interest (/ (/ interest 100) 12)
+  (let [monthly-interest (/ interest 100 12)
         num-periods (* 12 repayment-term)]
     (/ (* mortgage-size (Math/pow (+ 1 monthly-interest) num-periods) monthly-interest)
        (- (Math/pow (+ 1 monthly-interest) num-periods) 1))))
@@ -40,7 +40,7 @@
 (defn ltv [mortgage-size property-price]
   (* (/ mortgage-size property-price)))
 
-(defn compute-mortage []
+(defn compute-mortgage []
   (let [{:keys [property-price deposit interest repayment-term]} @mortgage-info
         mortgage-size-value (mortgage-size property-price deposit)
         monthly-repayment-value (monthly-repayment interest repayment-term mortgage-size-value)
@@ -57,11 +57,11 @@
 
 ;; component
 (defn mortgage-calculator-component []
-  (let [{:keys [mortgage-size total-repayment lifetime-cost monthly-repayment ltv]} (compute-mortage)]
+  (let [{:keys [mortgage-size total-repayment lifetime-cost monthly-repayment ltv]} (compute-mortgage)]
   [:div
    [:h3 "Mortgage Calculator"]
-   [:p "m size: " mortgage-size]
-   [:p "t repayment: " total-repayment]
-   [:p "lifetime cost: " lifetime-cost]
-   [:p "monthly repayment: " monthly-repayment]
-   [:p "ltv: " ltv]]))
+   [:p "Mortgage Size: " (float->string mortgage-size)]
+   [:p "Total Repayment: " (float->string total-repayment)]
+   [:p "Lifetime Cost: " (float->string lifetime-cost)]
+   [:p "Monthly Repayment: " (float->string monthly-repayment)]
+   [:p "LTV: " (float->string (* ltv 100))]]))
