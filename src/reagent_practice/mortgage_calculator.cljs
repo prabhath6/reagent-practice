@@ -18,6 +18,10 @@
   (let [num-with-no-strings (clojure.string/join (clojure.string/split num ","))]
     (js/parseFloat (.toFixed (js/parseFloat num-with-no-strings) 2))))
 
+(defn string->float2 [num]
+  (let [num-with-no-strings (clojure.string/join (clojure.string/split num ","))]
+    (js/parseFloat (js/parseFloat num-with-no-strings))))
+
 (defn float->string [num]
   (.toLocaleString num))
 
@@ -54,12 +58,32 @@
     (swap! mortgage-result assoc :ltv ltv-value)))
 
 ;; input handlers
+(defn input-handler [value param]
+  [:input {
+           :type "text"
+           :value value
+           :on-change (fn [e]
+                        (let [current-value (string->float2 (.. e -target -value))]
+                          (swap! mortgage-info assoc param current-value)))}])
 
 ;; component
 (defn mortgage-calculator-component []
   (let [{:keys [mortgage-size total-repayment lifetime-cost monthly-repayment ltv]} (compute-mortgage)]
   [:div
    [:h3 "Mortgage Calculator"]
+   [:div
+    "Property Price "
+    [input-handler (float->string (get @mortgage-info :property-price)) :property-price]]
+   [:div
+    "Deposit "
+    [input-handler (float->string (get @mortgage-info :deposit)) :deposit]]
+   [:div
+    "Interest "
+    [input-handler (float->string (get @mortgage-info :interest)) :interest]]
+   [:div
+    "Repayment Term "
+    [input-handler (float->string (get @mortgage-info :repayment-term)) :repayment-term]]
+   [:hr]
    [:p "Mortgage Size: " (float->string mortgage-size)]
    [:p "Total Repayment: " (float->string total-repayment)]
    [:p "Lifetime Cost: " (float->string lifetime-cost)]
